@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+    <spotifyHeader/>
+    <spotifyMain/>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import spotifyHeader from './components/spotifyHeader.vue'
+import spotifyMain from './components/spotifyMain.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  spotifyHeader,
+  spotifyMain
   }
 }
 </script>
 
 <style lang="scss">
+@import'./stylesheets/var.scss';
+@import'./stylesheets/general.scss';
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+font-family:  monospace;
+background-color: $background_color;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+  .container{
+    width: 1440px;
+  }
 }
 </style>
