@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="container">
-    <spotifyHeader/>
-    <spotifyMain/>
+    <spotifyHeader :SentGenreArray="genreArray" @ChangedGenre="SendSelectedGenre"/>
+    <spotifyMain :SentSelectedGenre="SelectedGenre" @ObtainGenres="SendGenres"/>
     </div>
   </div>
 </template>
@@ -16,6 +16,22 @@ export default {
   components: {
   spotifyHeader,
   spotifyMain
+  },
+
+  data(){
+    return{
+      genreArray:[],
+      SelectedGenre:""
+    }
+  },
+
+  methods:{
+    SendGenres(genreArray){
+    this.genreArray=genreArray;
+    },
+    SendSelectedGenre(SelectedGenre){
+    this.SelectedGenre=SelectedGenre;
+    }
   }
 }
 </script>

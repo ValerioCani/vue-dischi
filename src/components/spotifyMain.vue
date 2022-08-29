@@ -1,7 +1,7 @@
 <template>
     <main>
         <section>
-            <albumCard v-for="(album, index) in albumArray" :key="index" :details="album"/>
+            <albumCard  v-for="(album, index) in filterAlbums" :key="index" :details="album"/>
         </section>
     </main>
 </template>
@@ -12,22 +12,41 @@ import albumCard from './albumCard.vue'
 
 export default {
     name:'spotifyMain',
+    props:{
+       SentSelectedGenre:String 
+    },
     components: {
-    albumCard
+        albumCard
     },
     data(){
         return{
-            albumArray:[]
+            albumArray:[],
+            genreArray:[]
+        }
+    },
+    computed:{
+        filterAlbums(){
+                if(this.SentSelectedGenre==""){
+                    return this.albumArray;
+                } else{
+                   return this.albumArray.filter(album => album.genre == this.SentSelectedGenre)
+                }
         }
     },
     created(){
         axios.get('https://flynn.boolean.careers/exercises/api/array/music')
-        .then(response => {
-            this.albumArray = response.data.response;
-            console.log(this.albumArray);
+        .then(serverAnswer => {
+            this.albumArray = serverAnswer.data.response;
+            //da qui parte la creazione dell'array dei generi
+            for( let i=0; i<this.albumArray.length; i++){
+                if(!this.genreArray.includes(this.albumArray[i].genre)){
+                    this.genreArray.push(this.albumArray[i].genre);
+                }
+            }
+            this.$emit('ObtainGenres', this.genreArray)
         })
     }
-}
+} 
 </script>
 
 <style scoped lang="scss">
