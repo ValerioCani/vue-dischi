@@ -13,7 +13,8 @@ import albumCard from './albumCard.vue'
 export default {
     name:'spotifyMain',
     props:{
-       SentSelectedGenre:String 
+       SentSelectedGenre:String,
+       SentSelectedArtist:String
     },
     components: {
         albumCard
@@ -21,16 +22,21 @@ export default {
     data(){
         return{
             albumArray:[],
+            artistArray:[],
             genreArray:[]
         }
     },
     computed:{
         filterAlbums(){
-                if(this.SentSelectedGenre==""){
-                    return this.albumArray;
-                } else{
-                   return this.albumArray.filter(album => album.genre == this.SentSelectedGenre)
-                }
+            if(this.SentSelectedGenre=="" && this.SentSelectedArtist==""){
+                return this.albumArray;
+            } else if(this.SentSelectedGenre=="" && !this.SentSelectedArtist==""){
+                return this.albumArray.filter(album => album.author == this.SentSelectedArtist)
+            } else if(!this.SentSelectedGenre=="" && this.SentSelectedArtist==""){
+                return this.albumArray.filter(album => album.genre == this.SentSelectedGenre)
+            } else {
+                return this.albumArray.filter(album => album.genre == this.SentSelectedGenre).filter(album => album.author == this.SentSelectedArtist);
+            }
         }
     },
     created(){
@@ -42,8 +48,15 @@ export default {
                 if(!this.genreArray.includes(this.albumArray[i].genre)){
                     this.genreArray.push(this.albumArray[i].genre);
                 }
+                
+            }
+            for( let i=0; i<this.albumArray.length; i++){
+                if(!this.artistArray.includes(this.albumArray[i].author)){
+                    this.artistArray.push(this.albumArray[i].author);
+                } 
             }
             this.$emit('ObtainGenres', this.genreArray)
+            this.$emit('ObtainArtist', this.artistArray)
         })
     }
 } 

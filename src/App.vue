@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="container">
-    <spotifyHeader :SentGenreArray="genreArray" @ChangedGenre="SendSelectedGenre"/>
-    <spotifyMain :SentSelectedGenre="SelectedGenre" @ObtainGenres="SendGenres"/>
+    <spotifyHeader :SentGenreArray="genreArray" :SentArtistArray="artistArray" @ChangedGenre="SendSelectedGenre" @ChangedArtist="SendSelectedArtist"/>
+    <spotifyMain :SentSelectedGenre="SelectedGenre" :SentSelectedArtist="SelectedArtist" @ObtainGenres="SendGenres" @ObtainArtist="SendArtist"/>
     </div>
   </div>
 </template>
@@ -21,7 +21,9 @@ export default {
   data(){
     return{
       genreArray:[],
-      SelectedGenre:""
+      artistArray:[],
+      SelectedGenre:"",
+      SelectedArtist:""
     }
   },
 
@@ -29,8 +31,14 @@ export default {
     SendGenres(genreArray){
     this.genreArray=genreArray;
     },
+    SendArtist(artistArray){
+    this.artistArray=artistArray;
+    },
     SendSelectedGenre(SelectedGenre){
     this.SelectedGenre=SelectedGenre;
+    },
+    SendSelectedArtist(SelectedArtist){
+    this.SelectedArtist=SelectedArtist;
     }
   }
 }

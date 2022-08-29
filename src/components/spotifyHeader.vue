@@ -2,10 +2,17 @@
   <header>
     <img src="../assets/logo-small.svg" alt="">
     <div>
-      <label for="genre-selector">Select the Genre</label>
-      <select name="genre" id="genreSelector" v-model="selected" @change="$emit('ChangedGenre', selected)">
+      <label for="genreSelector">Select the Genre</label>
+      <select name="genre" id="genreSelector" v-model="GenreSelected" @change="$emit('ChangedGenre', GenreSelected)">
         <option value="">All seleced</option>
         <option v-for="(AlbumGenre, index) in SentGenreArray" :key="index" :value="AlbumGenre">{{AlbumGenre}}</option>
+      </select>
+    </div>
+    <div>
+      <label for="artistSelector">Select the Artist</label>
+      <select name="artist" id="artistSelector" v-model="ArtistSelected" @change="$emit('ChangedArtist', ArtistSelected)">
+        <option value="">All seleced</option>
+        <option v-for="(AlbumArtist, index) in SentArtistArray" :key="index" :value="AlbumArtist">{{AlbumArtist}}</option>
       </select>
     </div>
   </header>
@@ -15,16 +22,15 @@
 export default {
     name:'spotifyHeader',
     props:{
-      SentGenreArray:Array
+      SentGenreArray:Array,
+      SentArtistArray:Array
     },
     data(){
       return{
-      selected:""
+      GenreSelected:"",
+      ArtistSelected:""
       }
     },
-    mounted(){
-      console.log(this.selected)
-    }
 }
 </script>
 
