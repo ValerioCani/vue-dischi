@@ -19,41 +19,41 @@
 </template>
 
 <script>
-export default {
-    name:'spotifyHeader',
-    props:{
-      SentGenreArray:Array,
-      SentArtistArray:Array
-    },
-    data(){
-      return{
-      GenreSelected:"",
-      ArtistSelected:""
-      }
-    },
-}
+  export default {
+      name:'spotifyHeader',
+      props:{
+        SentGenreArray:Array,
+        SentArtistArray:Array
+      },
+      data(){
+        return{
+        GenreSelected:"",
+        ArtistSelected:""
+        }
+      },
+  }
 </script>
 
 <style scoped lang="scss">
-@import'../stylesheets/var.scss';
-@import'../stylesheets/general.scss';
-header{
-height: 55px;
-background-color: $primary_color;
-display: flex;
-justify-content: space-between;
-align-items: center;
-  img{
-  height: 100%;
-  padding: 12px;
-  }
-  div{
-  margin-right: 12px;
-    label{
-    color:$album_title_color;
+  @import'../stylesheets/var.scss';
+  @import'../stylesheets/general.scss';
+  header{
+  height: 55px;
+  background-color: $primary_color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+    img{
+    height: 100%;
+    padding: 12px;
+    }
+    div{
     margin-right: 12px;
-    font-size: 18px;
+      label{
+      color:$album_title_color;
+      margin-right: 12px;
+      font-size: 18px;
+      }
     }
   }
-}
 </style>
